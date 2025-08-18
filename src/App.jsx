@@ -6,7 +6,6 @@ import maplibregl from 'maplibre-gl'
 import { FaTiktok } from 'react-icons/fa';
 import 'maplibre-gl/dist/maplibre-gl.css'
 
-
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -193,22 +192,18 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-const scrollToSection = (id) => {
-  const element = document.getElementById(id)
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id)
 
-  if (!element) return
+    if (!element) return
 
-  // Așteaptă închiderea meniului, apoi scroll
-  setIsMenuOpen(false)
+    // Așteaptă închiderea meniului, apoi scroll
+    setIsMenuOpen(false)
 
-  setTimeout(() => {
-    element.scrollIntoView({ behavior: 'smooth' })
-  }, 300) // timp în care meniul se închide și layout-ul se stabilizează
-}
-
-
-
-
+    setTimeout(() => {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }, 300) // timp în care meniul se închide și layout-ul se stabilizează
+  }
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F5C9A2' }}>
@@ -223,7 +218,7 @@ const scrollToSection = (id) => {
         }`}
         style={{ zIndex: 1000 }}
       >
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <motion.a 
               href="#" 
@@ -233,7 +228,7 @@ const scrollToSection = (id) => {
               <img 
                 src={FoxiLogo} 
                 alt="Foxi Cafe Logo" 
-                className="h-12 md:h-16 w-auto"
+                className="h-14 w-auto"
               />
             </motion.a>
             <div className="hidden md:flex space-x-8">
@@ -247,7 +242,7 @@ const scrollToSection = (id) => {
                 <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="font-medium transition-colors"
+                  className="font-medium text-lg transition-colors"
                   style={{ color: '#125242' }}
                   whileHover={{ scale: 1.1, color: '#DF7634' }}
                   whileTap={{ scale: 0.95 }}
@@ -263,7 +258,7 @@ const scrollToSection = (id) => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               whileTap={{ scale: 0.95 }}
             >
-              {isMenuOpen ? <X /> : <Menu />}
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </motion.button>
           </div>
         </div>
@@ -277,7 +272,7 @@ const scrollToSection = (id) => {
               className="md:hidden"
               style={{ backgroundColor: '#F5C9A2', zIndex: 1000 }}
             >
-              <div className="container mx-auto px-4 py-4 space-y-4 border-t border-[#DF7634]/20">
+              <div className="container mx-auto px-6 py-4 space-y-4 border-t border-[#DF7634]/20">
                 {[
                   { id: 'home', name: 'Acasă' },
                   { id: 'about', name: 'Despre Noi' },
@@ -288,7 +283,7 @@ const scrollToSection = (id) => {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="block w-full text-left font-medium transition-colors"
+                    className="block w-full text-left font-medium text-lg transition-colors"
                     style={{ color: '#125242' }}
                     onMouseEnter={(e) => e.target.style.color = '#DF7634'}
                     onMouseLeave={(e) => e.target.style.color = '#125242'}
@@ -320,13 +315,13 @@ const scrollToSection = (id) => {
         </motion.div>
         
         <motion.div 
-          className="relative z-10 text-center text-white px-4"
+          className="relative z-10 text-center text-white px-6"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold mb-6 font-serif"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 font-serif"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -349,7 +344,7 @@ const scrollToSection = (id) => {
           >
             <motion.button
               onClick={() => scrollToSection('products')}
-              className="px-8 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg"
+              className="px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg"
               style={{ backgroundColor: '#DF7634', color: '#FCFFFB' }}
               whileHover={{ scale: 1.05, backgroundColor: '#F7975B' }}
               whileTap={{ scale: 0.95 }}
@@ -358,7 +353,7 @@ const scrollToSection = (id) => {
             </motion.button>
             <motion.button
               onClick={() => scrollToSection('locations')}
-              className="px-8 py-3 border-2 rounded-full font-semibold transition-all duration-300"
+              className="px-8 py-3 border-2 rounded-full font-semibold text-lg transition-all duration-300"
               style={{ borderColor: '#FCFFFB', color: '#FCFFFB' }}
               whileHover={{ scale: 1.05, backgroundColor: '#FCFFFB', color: '#125242' }}
               whileTap={{ scale: 0.95 }}
@@ -370,8 +365,8 @@ const scrollToSection = (id) => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 md:py-32" style={{ backgroundColor: '#FCFFFB' }}>
-        <div className="container mx-auto px-4">
+      <section id="about" className="py-20 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
+        <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -415,7 +410,7 @@ const scrollToSection = (id) => {
               <img 
                 src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800" 
                 alt="Foxi Cafe Interior" 
-                className="rounded-2xl shadow-2xl w-full h-80 object-cover"
+                className="rounded-2xl shadow-2xl w-full h-96 object-cover"
               />
               <motion.div
                 className="absolute -bottom-4 -right-4 p-4 rounded-2xl shadow-lg"
@@ -434,8 +429,8 @@ const scrollToSection = (id) => {
       </section>
 
       {/* Products Section */}
-      <section id="products" className="py-20 md:py-32" style={{ backgroundColor: '#F5C9A2' }}>
-        <div className="container mx-auto px-4">
+      <section id="products" className="py-20 md:py-28" style={{ backgroundColor: '#F5C9A2' }}>
+        <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -460,10 +455,10 @@ const scrollToSection = (id) => {
                 className="group"
               >
                 <div 
-                  className="rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+                  className="rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col"
                   style={{ backgroundColor: '#FCFFFB' }}
                 >
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden flex-1">
                     <img 
                       src={product.image} 
                       alt={product.name}
@@ -495,8 +490,8 @@ const scrollToSection = (id) => {
       </section>
 
       {/* Locations Section */}
-      <section id="locations" className="py-20 md:py-32" style={{ backgroundColor: '#FCFFFB' }}>
-        <div className="container mx-auto px-4">
+      <section id="locations" className="py-20 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
+        <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -521,7 +516,7 @@ const scrollToSection = (id) => {
                   viewport={{ once: true }}
                 >
                   <motion.div
-                    className="p-6 rounded-2xl  transition-all duration-300 shadow-md hover:shadow-xl"
+                    className="p-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl"
                     style={{ backgroundColor: 'white' }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -569,8 +564,8 @@ const scrollToSection = (id) => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 md:py-32" style={{ backgroundColor: '#F5C9A2' }}>
-        <div className="container mx-auto px-4">
+      <section className="py-20 md:py-28" style={{ backgroundColor: '#F5C9A2' }}>
+        <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -638,8 +633,8 @@ const scrollToSection = (id) => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 md:py-32" style={{ backgroundColor: '#FCFFFB' }}>
-        <div className="container mx-auto px-4">
+      <section id="contact" className="py-20 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
+        <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -676,7 +671,7 @@ const scrollToSection = (id) => {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <item.icon className="w-5 h-5" style={{ color: '#DF7634' }} />
-                    <span>{item.text}</span>
+                    <span className="text-lg">{item.text}</span>
                   </motion.div>
                 ))}
               </div>
@@ -689,12 +684,14 @@ const scrollToSection = (id) => {
                   <motion.a
                     key={index}
                     href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="p-3 rounded-full transition-colors"
                     style={{ backgroundColor: '#F5C9A2', color: '#125242' }}
                     whileHover={{ scale: 1.1, rotate: 360 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon className="w-6 h-6" />
                   </motion.a>
                 ))}
               </div>
@@ -711,7 +708,7 @@ const scrollToSection = (id) => {
                 <input
                   type="email"
                   placeholder="Adresa ta de email"
-                  className="w-full px-4 py-3 rounded-xl border transition-colors focus:outline-none"
+                  className="w-full px-4 py-3 rounded-xl border transition-colors focus:outline-none text-lg"
                   style={{ 
                     backgroundColor: '#F5C9A2', 
                     borderColor: '#DF7634', 
@@ -720,7 +717,7 @@ const scrollToSection = (id) => {
                 />
                 <motion.button
                   type="submit"
-                  className="w-full py-3 rounded-xl font-semibold transition-all duration-300"
+                  className="w-full py-3 rounded-xl font-semibold text-lg transition-all duration-300"
                   style={{ backgroundColor: '#DF7634', color: '#FCFFFB' }}
                   whileHover={{ scale: 1.02, backgroundColor: '#F7975B' }}
                   whileTap={{ scale: 0.98 }}
@@ -734,31 +731,31 @@ const scrollToSection = (id) => {
       </section>
 
       {/* Footer */}
-     <footer className="py-8" style={{ backgroundColor: '#125242' }}>
-  <div className="container mx-auto px-4">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      viewport={{ once: true }}
-      className="flex flex-col items-center"
-    >
-      <div className="flex flex-col items-center max-w-md">
-        <img 
-          src={FoxiLogo} 
-          alt="Foxi Cafe Logo" 
-          className="h-10 w-auto mb-3 opacity-90 hover:opacity-100 transition-opacity"
-        />
-        <p className="text-sm mb-2 font-light" style={{ color: '#F5C9A2' }}>
-          Cafea de specialitate & mini-market urban
-        </p>
-        <p className="text-xs font-light" style={{ color: 'rgba(245, 201, 162, 0.7)' }}>
-          © 2025 Foxi Cafe & Market. Toate drepturile rezervate.
-        </p>
-      </div>
-    </motion.div>
-  </div>
-</footer>
+      <footer className="py-8" style={{ backgroundColor: '#125242' }}>
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="flex flex-col items-center"
+          >
+            <div className="flex flex-col items-center max-w-md">
+              <img 
+                src={FoxiLogo} 
+                alt="Foxi Cafe Logo" 
+                className="h-12 w-auto mb-4 opacity-90 hover:opacity-100 transition-opacity"
+              />
+              <p className="text-sm mb-2 font-light" style={{ color: '#F5C9A2' }}>
+                Cafea de specialitate & mini-market urban
+              </p>
+              <p className="text-xs font-light" style={{ color: 'rgba(245, 201, 162, 0.7)' }}>
+                © 2025 Foxi Cafe & Market. Toate drepturile rezervate.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </footer>
     </div>
   )
 }
