@@ -206,7 +206,12 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F5C9A2' }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F5C9A2' }}>
+      {/* Add viewport meta tag for proper mobile rendering */}
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      </head>
+
       {/* Navigation */}
       <motion.nav 
         initial={{ y: -100 }}
@@ -218,7 +223,7 @@ function App() {
         }`}
         style={{ zIndex: 1000 }}
       >
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 sm:px-6 py-4">
           <div className="flex justify-between items-center">
             <motion.a 
               href="#" 
@@ -228,7 +233,7 @@ function App() {
               <img 
                 src={FoxiLogo} 
                 alt="Foxi Cafe Logo" 
-                className="h-14 w-auto"
+                className="h-12 sm:h-14 w-auto"
               />
             </motion.a>
             <div className="hidden md:flex space-x-8">
@@ -269,10 +274,10 @@ function App() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden"
+              className="md:hidden fixed top-full left-0 w-full"
               style={{ backgroundColor: '#F5C9A2', zIndex: 1000 }}
             >
-              <div className="container mx-auto px-6 py-4 space-y-4 border-t border-[#DF7634]/20">
+              <div className="container mx-auto px-4 py-4 space-y-4 border-t border-[#DF7634]/20">
                 {[
                   { id: 'home', name: 'Acasă' },
                   { id: 'about', name: 'Despre Noi' },
@@ -283,7 +288,7 @@ function App() {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="block w-full text-left font-medium text-lg transition-colors"
+                    className="block w-full text-left font-medium text-lg transition-colors py-2"
                     style={{ color: '#125242' }}
                     onMouseEnter={(e) => e.target.style.color = '#DF7634'}
                     onMouseLeave={(e) => e.target.style.color = '#125242'}
@@ -315,13 +320,13 @@ function App() {
         </motion.div>
         
         <motion.div 
-          className="relative z-10 text-center text-white px-6"
+          className="relative z-10 text-center text-white px-4 sm:px-6"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
           <motion.h1 
-            className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 font-serif"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 font-serif"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -329,7 +334,7 @@ function App() {
             Cafea de specialitate
           </motion.h1>
           <motion.p 
-            className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto"
+            className="text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
@@ -344,7 +349,7 @@ function App() {
           >
             <motion.button
               onClick={() => scrollToSection('products')}
-              className="px-8 py-3 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg"
+              className="px-6 sm:px-8 py-3 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 shadow-lg"
               style={{ backgroundColor: '#DF7634', color: '#FCFFFB' }}
               whileHover={{ scale: 1.05, backgroundColor: '#F7975B' }}
               whileTap={{ scale: 0.95 }}
@@ -353,7 +358,7 @@ function App() {
             </motion.button>
             <motion.button
               onClick={() => scrollToSection('locations')}
-              className="px-8 py-3 border-2 rounded-full font-semibold text-lg transition-all duration-300"
+              className="px-6 sm:px-8 py-3 border-2 rounded-full font-semibold text-base sm:text-lg transition-all duration-300"
               style={{ borderColor: '#FCFFFB', color: '#FCFFFB' }}
               whileHover={{ scale: 1.05, backgroundColor: '#FCFFFB', color: '#125242' }}
               whileTap={{ scale: 0.95 }}
@@ -365,8 +370,8 @@ function App() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
-        <div className="container mx-auto px-6">
+      <section id="about" className="py-16 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -374,19 +379,19 @@ function App() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
               Despre Noi
             </h2>
             <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
           </motion.div>
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="space-y-6 text-lg"
+              className="space-y-6 text-base sm:text-lg"
               style={{ color: '#333333' }}
             >
               <p className="leading-relaxed">
@@ -410,7 +415,7 @@ function App() {
               <img 
                 src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800" 
                 alt="Foxi Cafe Interior" 
-                className="rounded-2xl shadow-2xl w-full h-96 object-cover"
+                className="rounded-2xl shadow-2xl w-full h-64 sm:h-96 object-cover"
               />
               <motion.div
                 className="absolute -bottom-4 -right-4 p-4 rounded-2xl shadow-lg"
@@ -429,8 +434,8 @@ function App() {
       </section>
 
       {/* Products Section */}
-      <section id="products" className="py-20 md:py-28" style={{ backgroundColor: '#F5C9A2' }}>
-        <div className="container mx-auto px-6">
+      <section id="products" className="py-16 md:py-28" style={{ backgroundColor: '#F5C9A2' }}>
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -438,13 +443,13 @@ function App() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
               Produsele Noastre
             </h2>
             <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
           </motion.div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {products.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -462,7 +467,7 @@ function App() {
                     <img 
                       src={product.image} 
                       alt={product.name}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-48 sm:h-64 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
                     <div 
                       className="absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-semibold"
@@ -471,10 +476,10 @@ function App() {
                       {product.label}
                     </div>
                   </div>
-                  <div className="p-6">
+                  <div className="p-4 sm:p-6">
                     <div className="flex items-center gap-2 mb-2">
                       <div style={{ color: '#DF7634' }}>{product.icon}</div>
-                      <h3 className="text-xl font-bold" style={{ color: '#125242' }}>
+                      <h3 className="text-lg sm:text-xl font-bold" style={{ color: '#125242' }}>
                         {product.name}
                       </h3>
                     </div>
@@ -490,8 +495,8 @@ function App() {
       </section>
 
       {/* Locations Section */}
-      <section id="locations" className="py-20 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
-        <div className="container mx-auto px-6">
+      <section id="locations" className="py-16 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -499,13 +504,13 @@ function App() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
               Locațiile Noastre
             </h2>
             <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
           </motion.div>
           
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
             <div className="space-y-4">
               {locations.map((location, index) => (
                 <motion.div
@@ -516,12 +521,12 @@ function App() {
                   viewport={{ once: true }}
                 >
                   <motion.div
-                    className="p-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl"
+                    className="p-4 sm:p-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl"
                     style={{ backgroundColor: 'white' }}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <h3 className="text-xl font-bold mb-2 flex items-center gap-2" style={{ color: '#125242' }}>
+                    <h3 className="text-lg sm:text-xl font-bold mb-2 flex items-center gap-2" style={{ color: '#125242' }}>
                       <MapPin className="w-5 h-5" style={{ color: '#DF7634' }} />
                       {location.name}
                     </h3>
@@ -541,8 +546,8 @@ function App() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl relative"
-              style={{ border: `3px solid ${colors.complementary2}` }}
+              className="h-80 sm:h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl relative"
+              style={{ border: `3px solid ${colors.complementary2}`, minHeight: '320px' }}
             >
               <div id="map" className="w-full h-full"></div>
               <style jsx global>{`
@@ -557,6 +562,10 @@ function App() {
                   border-radius: 8px;
                   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
                 }
+                .maplibregl-ctrl-top-right {
+                  top: 10px;
+                  right: 10px;
+                }
               `}</style>
             </motion.div>
           </div>
@@ -564,8 +573,8 @@ function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 md:py-28" style={{ backgroundColor: '#F5C9A2' }}>
-        <div className="container mx-auto px-6">
+      <section className="py-16 md:py-28" style={{ backgroundColor: '#F5C9A2' }}>
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -573,7 +582,7 @@ function App() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
               Ce Spun Clienții
             </h2>
             <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
@@ -581,7 +590,7 @@ function App() {
           
           <div className="max-w-4xl mx-auto">
             <motion.div
-              className="rounded-2xl shadow-xl p-8 md:p-12"
+              className="rounded-2xl shadow-xl p-6 sm:p-8 md:p-12"
               style={{ backgroundColor: '#FCFFFB' }}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -599,24 +608,24 @@ function App() {
                 >
                   <div className="flex justify-center mb-4">
                     {[...Array(testimonials[currentSlide].rating)].map((_, i) => (
-                      <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+                      <Star key={i} className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <p className="text-xl md:text-2xl mb-6 italic" style={{ color: '#333333' }}>
+                  <p className="text-lg sm:text-xl md:text-2xl mb-6 italic" style={{ color: '#333333' }}>
                     "{testimonials[currentSlide].text}"
                   </p>
-                  <p className="text-lg font-bold" style={{ color: '#DF7634' }}>
+                  <p className="text-base sm:text-lg font-bold" style={{ color: '#DF7634' }}>
                     {testimonials[currentSlide].author}
                   </p>
                 </motion.div>
               </AnimatePresence>
               
-              <div className="flex justify-center mt-8 space-x-2">
+              <div className="flex justify-center mt-6 sm:mt-8 space-x-2">
                 {testimonials.map((_, index) => (
                   <motion.button
                     key={index}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentSlide ? 'w-8' : ''
+                      index === currentSlide ? 'w-6 sm:w-8' : ''
                     }`}
                     style={{ 
                       backgroundColor: index === currentSlide ? '#DF7634' : '#F7975B' 
@@ -633,8 +642,8 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
-        <div className="container mx-auto px-6">
+      <section id="contact" className="py-16 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -642,20 +651,20 @@ function App() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
               Contactează-ne
             </h2>
             <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
           </motion.div>
           
-          <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#125242' }}>Informații de contact</h3>
+              <h3 className="text-xl sm:text-2xl font-bold mb-6" style={{ color: '#125242' }}>Informații de contact</h3>
               <div className="space-y-4">
                 {[
                   { icon: Phone, text: "+373 60 665 665" },
@@ -671,12 +680,12 @@ function App() {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <item.icon className="w-5 h-5" style={{ color: '#DF7634' }} />
-                    <span className="text-lg">{item.text}</span>
+                    <span className="text-base sm:text-lg">{item.text}</span>
                   </motion.div>
                 ))}
               </div>
               
-              <div className="flex space-x-4 mt-8">
+              <div className="flex space-x-4 mt-6 sm:mt-8">
                 {[
                   { icon: Instagram, href: "https://www.instagram.com/foxi_cafemarketmoldova/" },
                   { icon: FaTiktok, href: "https://www.tiktok.com/@foxi_cafemarketmoldova?is_from_webapp=1&sender_device=pc" },
@@ -691,7 +700,7 @@ function App() {
                     whileHover={{ scale: 1.1, rotate: 360 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    <Icon className="w-6 h-6" />
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </motion.a>
                 ))}
               </div>
@@ -703,12 +712,12 @@ function App() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold mb-6" style={{ color: '#125242' }}>Abonează-te la noutăți</h3>
+              <h3 className="text-xl sm:text-2xl font-bold mb-6" style={{ color: '#125242' }}>Abonează-te la noutăți</h3>
               <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
                 <input
                   type="email"
                   placeholder="Adresa ta de email"
-                  className="w-full px-4 py-3 rounded-xl border transition-colors focus:outline-none text-lg"
+                  className="w-full px-4 py-3 rounded-xl border transition-colors focus:outline-none text-base sm:text-lg"
                   style={{ 
                     backgroundColor: '#F5C9A2', 
                     borderColor: '#DF7634', 
@@ -717,7 +726,7 @@ function App() {
                 />
                 <motion.button
                   type="submit"
-                  className="w-full py-3 rounded-xl font-semibold text-lg transition-all duration-300"
+                  className="w-full py-3 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300"
                   style={{ backgroundColor: '#DF7634', color: '#FCFFFB' }}
                   whileHover={{ scale: 1.02, backgroundColor: '#F7975B' }}
                   whileTap={{ scale: 0.98 }}
@@ -732,7 +741,7 @@ function App() {
 
       {/* Footer */}
       <footer className="py-8" style={{ backgroundColor: '#125242' }}>
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -740,11 +749,11 @@ function App() {
             viewport={{ once: true }}
             className="flex flex-col items-center"
           >
-            <div className="flex flex-col items-center max-w-md">
+            <div className="flex flex-col items-center max-w-md text-center">
               <img 
                 src={FoxiLogo} 
                 alt="Foxi Cafe Logo" 
-                className="h-12 w-auto mb-4 opacity-90 hover:opacity-100 transition-opacity"
+                className="h-10 sm:h-12 w-auto mb-4 opacity-90 hover:opacity-100 transition-opacity"
               />
               <p className="text-sm mb-2 font-light" style={{ color: '#F5C9A2' }}>
                 Cafea de specialitate & mini-market urban
