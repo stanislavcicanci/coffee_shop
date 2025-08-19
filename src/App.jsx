@@ -333,78 +333,111 @@ function App() {
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       </Helmet>
 
-      {/* --- Navigation --- */}
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#F5C9A2]/90 backdrop-blur-md shadow-lg border-b border-[#DF7634]/20' : 'bg-transparent'}`}
-        style={{ zIndex: 1000 }}
+     {/* --- Navigation --- */}
+<motion.nav
+  initial={{ y: -100 }}
+  animate={{ y: 0 }}
+  className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#F5C9A2]/20 backdrop-blur-xl shadow-lg border-b border-white/10' : 'bg-transparent backdrop-blur-none'}`}
+  style={{ 
+    zIndex: 1000,
+    // Efectul de sticlă Apple
+    background: scrolled 
+      ? 'rgba(245, 201, 162, 0.15)' 
+      : 'transparent',
+    backdropFilter: scrolled 
+      ? 'blur(20px) saturate(180%)' 
+      : 'none',
+    WebkitBackdropFilter: scrolled 
+      ? 'blur(20px) saturate(180%)' 
+      : 'none',
+    borderBottom: scrolled 
+      ? '1px solid rgba(255, 255, 255, 0.125)' 
+      : 'none',
+    boxShadow: scrolled 
+      ? '0 1px 12px rgba(0, 0, 0, 0.1)' 
+      : 'none'
+  }}
+>
+  <div className="container mx-auto px-4 sm:px-6 py-4">
+    <div className="flex justify-between items-center">
+      <motion.a href="#" className="flex items-center" whileHover={{ scale: 1.05 }}>
+        <img src={FoxiLogo} alt="Foxi Cafe & Market - cafenea în Chișinău" width="160" height="56" className="h-12 sm:h-14 w-auto" />
+      </motion.a>
+      <div className="hidden md:flex space-x-8">
+        {[
+          { id: 'home', name: 'Acasă' },
+          { id: 'about', name: 'Despre Noi' },
+          { id: 'products', name: 'Produse' },
+          { id: 'locations', name: 'Locații' },
+          { id: 'contact', name: 'Contact' },
+        ].map(item => (
+          <motion.button
+            key={item.id}
+            onClick={() => scrollToSection(item.id)}
+            className="font-medium text-lg transition-colors"
+            style={{ color: scrolled ? '#125242' : 'white', textShadow: scrolled ? 'none' : '0 1px 2px rgba(0,0,0,0.2)' }}
+            whileHover={{ scale: 1.1, color: '#DF7634' }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {item.name}
+          </motion.button>
+        ))}
+      </div>
+
+      <motion.button 
+        className="md:hidden" 
+        style={{ color: scrolled ? '#125242' : 'white' }} 
+        onClick={() => setIsMenuOpen(!isMenuOpen)} 
+        whileTap={{ scale: 0.95 }}
       >
-        <div className="container mx-auto px-4 sm:px-6 py-4">
-          <div className="flex justify-between items-center">
-            <motion.a href="#" className="flex items-center" whileHover={{ scale: 1.05 }}>
-              <img src={FoxiLogo} alt="Foxi Cafe & Market - cafenea în Chișinău" width="160" height="56" className="h-12 sm:h-14 w-auto" />
-            </motion.a>
-            <div className="hidden md:flex space-x-8">
-              {[
-                { id: 'home', name: 'Acasă' },
-                { id: 'about', name: 'Despre Noi' },
-                { id: 'products', name: 'Produse' },
-                { id: 'locations', name: 'Locații' },
-                { id: 'contact', name: 'Contact' },
-              ].map(item => (
-                <motion.button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="font-medium text-lg transition-colors"
-                  style={{ color: '#125242' }}
-                  whileHover={{ scale: 1.1, color: '#DF7634' }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {item.name}
-                </motion.button>
-              ))}
-            </div>
+        {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+      </motion.button>
+    </div>
+  </div>
 
-            <motion.button className="md:hidden" style={{ color: '#125242' }} onClick={() => setIsMenuOpen(!isMenuOpen)} whileTap={{ scale: 0.95 }}>
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </motion.button>
-          </div>
-        </div>
-
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden fixed top-full left-0 w-full"
-              style={{ backgroundColor: '#F5C9A2', zIndex: 1000 }}
+  <AnimatePresence>
+    {isMenuOpen && (
+      <motion.div
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: 1, height: 'auto' }}
+        exit={{ opacity: 0, height: 0 }}
+        className="md:hidden fixed top-full left-0 w-full"
+        style={{ 
+          zIndex: 1000,
+          // Efect de sticlă și pentru meniul mobil
+          background: 'rgba(245, 201, 162, 0.95)',
+          backdropFilter: 'blur(20px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          borderTop: '1px solid rgba(255, 255, 255, 0.2)'
+        }}
+      >
+        <div className="container mx-auto px-4 py-4 space-y-4">
+          {[
+            { id: 'home', name: 'Acasă' },
+            { id: 'about', name: 'Despre Noi' },
+            { id: 'products', name: 'Produse' },
+            { id: 'locations', name: 'Locații' },
+            { id: 'contact', name: 'Contact' },
+          ].map(item => (
+            <button
+              key={item.id}
+              onClick={() => {
+                scrollToSection(item.id);
+                setIsMenuOpen(false);
+              }}
+              className="block w-full text-left font-medium text-lg transition-colors py-2"
+              style={{ color: '#125242' }}
+              onMouseEnter={e => (e.target.style.color = '#DF7634')}
+              onMouseLeave={e => (e.target.style.color = '#125242')}
             >
-              <div className="container mx-auto px-4 py-4 space-y-4 border-t border-[#DF7634]/20">
-                {[
-                  { id: 'home', name: 'Acasă' },
-                  { id: 'about', name: 'Despre Noi' },
-                  { id: 'products', name: 'Produse' },
-                  { id: 'locations', name: 'Locații' },
-                  { id: 'contact', name: 'Contact' },
-                ].map(item => (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className="block w-full text-left font-medium text-lg transition-colors py-2"
-                    style={{ color: '#125242' }}
-                    onMouseEnter={e => (e.target.style.color = '#DF7634')}
-                    onMouseLeave={e => (e.target.style.color = '#125242')}
-                  >
-                    {item.name}
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.nav>
+              {item.name}
+            </button>
+          ))}
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+</motion.nav>
 
       {/* --- Hero Section --- */}
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
