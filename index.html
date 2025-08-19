@@ -1,10 +1,142 @@
 <!doctype html>
-<html lang="en">
+<html lang="ro">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Foxi Cafe & Market Chișinău – Cafea de specialitate, Motiko, patiserie, 6 locații</title>
+    <meta name="description" content="Foxi Cafe & Market în Chișinău: cafea de specialitate, deserturi japoneze Motiko, patiserie proaspătă și mini-market. 6 locații deschise zilnic 7:00–22:00." />
     <link rel="icon" type="image/png" href="/Foxi_logo 1.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foxi Cafe Market</title>
+    <link rel="canonical" href="https://foxicafe.md/" />
+    <link rel="alternate" href="https://foxicafe.md/" hreflang="ro" />
+
+    <!-- Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Foxi Cafe & Market">
+    <meta property="og:title" content="Foxi Cafe & Market – 6 locații în Chișinău" />
+    <meta property="og:description" content="Cafea de specialitate, Motiko, patiserie & mini-market. Deschis zilnic 7:00–22:00." />
+    <meta property="og:url" content="https://foxicafe.md/" />
+    <meta property="og:image" content="https://foxicafe.md/og-cover.jpg" />
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Performanță de bază (ajută la LCP/INP) -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://api.maptiler.com" crossorigin>
+    <meta name="theme-color" content="#125242" />
+
+    <!-- LocalBusiness pentru toate locațiile (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://foxicafe.md/#org",
+          "name": "Foxi Cafe & Market",
+          "url": "https://foxicafe.md/",
+          "logo": "https://foxicafe.md/Foxi_logo_1.png",
+          "sameAs": [
+            "https://www.instagram.com/foxi_cafemarketmoldova/",
+            "https://www.tiktok.com/@foxi_cafemarketmoldova"
+          ]
+        },
+        {
+          "@type": "CafeOrCoffeeShop",
+          "name": "Foxi Cafe & Market – Igor Vieru 16/1",
+          "image": "https://foxicafe.md/og-cover.jpg",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Strada Igor Vieru 16/1",
+            "addressLocality": "Chișinău",
+            "addressCountry": "MD"
+          },
+          "telephone": "+37360665665",
+          "openingHours": "Mo-Su 07:00-22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.0506347, "longitude": 28.8947369 },
+          "servesCuisine": ["Coffee","Bakery","Japanese Desserts"],
+          "priceRange": "MDL",
+          "url": "https://foxicafe.md/locatii/igor-vieru-16-1",
+          "parentOrganization": { "@id": "https://foxicafe.md/#org" },
+          "sameAs": ["https://www.instagram.com/foxi_cafemarketmoldova/"]
+        },
+        {
+          "@type": "CafeOrCoffeeShop",
+          "name": "Foxi Cafe & Market – Andrei Doga 26/4",
+          "image": "https://foxicafe.md/og-cover.jpg",
+          "address": { "@type": "PostalAddress", "streetAddress": "Strada Andrei Doga 26/4", "addressLocality": "Chișinău", "addressCountry": "MD" },
+          "telephone": "+37360665665",
+          "openingHours": "Mo-Su 07:00-22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.03465, "longitude": 28.8555 },
+          "url": "https://foxicafe.md/locatii/andrei-doga-26-4",
+          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+        },
+        {
+          "@type": "CafeOrCoffeeShop",
+          "name": "Foxi Cafe & Market – Gheorghe Asachi 27/C",
+          "image": "https://foxicafe.md/og-cover.jpg",
+          "address": { "@type": "PostalAddress", "streetAddress": "Strada Gheorghe Asachi 27/C", "addressLocality": "Chișinău", "addressCountry": "MD" },
+          "telephone": "+37360665665",
+          "openingHours": "Mo-Su 07:00-22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.00119, "longitude": 28.82255 },
+          "url": "https://foxicafe.md/locatii/gheorghe-asachi-27c",
+          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+        },
+        {
+          "@type": "CafeOrCoffeeShop",
+          "name": "Foxi Cafe & Market – Ierusalim 7",
+          "image": "https://foxicafe.md/og-cover.jpg",
+          "address": { "@type": "PostalAddress", "streetAddress": "Strada Ierusalim 7", "addressLocality": "Chișinău", "addressCountry": "MD" },
+          "telephone": "+37360665665",
+          "openingHours": "Mo-Su 07:00-22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.030519, "longitude": 28.838768 },
+          "url": "https://foxicafe.md/locatii/ierusalim-7",
+          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+        },
+        {
+          "@type": "CafeOrCoffeeShop",
+          "name": "Foxi Cafe & Market – Mircea cel Bătrân 41A",
+          "image": "https://foxicafe.md/og-cover.jpg",
+          "address": { "@type": "PostalAddress", "streetAddress": "Strada Mircea cel Bătrân 41A", "addressLocality": "Chișinău", "addressCountry": "MD" },
+          "telephone": "+37360665665",
+          "openingHours": "Mo-Su 07:00-22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.0600006, "longitude": 28.8910569 },
+          "url": "https://foxicafe.md/locatii/mircea-41a",
+          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+        },
+        {
+          "@type": "CafeOrCoffeeShop",
+          "name": "Foxi Cafe & Market – Albișoara 84/9",
+          "image": "https://foxicafe.md/og-cover.jpg",
+          "address": { "@type": "PostalAddress", "streetAddress": "Strada Albișoara 84/9", "addressLocality": "Chișinău", "addressCountry": "MD" },
+          "telephone": "+37360665665",
+          "openingHours": "Mo-Su 07:00-22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.0367294, "longitude": 28.8283902 },
+          "url": "https://foxicafe.md/locatii/albisoara-84-9",
+          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Care sunt locațiile Foxi Cafe & Market în Chișinău?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Avem 6 locații: Igor Vieru 16/1, Andrei Doga 26/4, Gheorghe Asachi 27/C, Ierusalim 7, Mircea cel Bătrân 41A, Albișoara 84/9. Program: 7:00–22:00."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Ce produse găsesc la Foxi?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Cafea de specialitate, deserturi japoneze Motiko, patiserie și sandwichuri & snacks."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
