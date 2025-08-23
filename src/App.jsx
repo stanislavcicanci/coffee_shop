@@ -386,7 +386,7 @@ function App() {
 
     <motion.button 
   className="md:hidden" 
-  style={{ color: '#125242' }} // Elimină condiția basată pe scroll
+  style={{ color: '#125242' }}
   onClick={() => setIsMenuOpen(!isMenuOpen)} 
   whileTap={{ scale: 0.95 }}
 >
@@ -401,7 +401,7 @@ function App() {
       initial={{ opacity: 0, height: 0 }}
       animate={{ opacity: 1, height: 'auto' }}
       exit={{ opacity: 0, height: 0 }}
-      className="md:hidden fixed top-0 left-0 w-full mt-16" // Schimbă top-full în top-0 și adaugă mt-16
+      className="md:hidden fixed top-0 left-0 w-full mt-16" 
       style={{ 
         zIndex: 1000,
         background: 'rgba(245, 201, 162, 0.95)',
