@@ -384,33 +384,32 @@ function App() {
         ))}
       </div>
 
-      <motion.button 
-        className="md:hidden" 
-        style={{ color: scrolled ? '#125242' : 'white' }} 
-        onClick={() => setIsMenuOpen(!isMenuOpen)} 
-        whileTap={{ scale: 0.95 }}
-      >
-        {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
-      </motion.button>
+    <motion.button 
+  className="md:hidden" 
+  style={{ color: '#125242' }} // Elimină condiția basată pe scroll
+  onClick={() => setIsMenuOpen(!isMenuOpen)} 
+  whileTap={{ scale: 0.95 }}
+>
+  {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+</motion.button>
     </div>
   </div>
 
-  <AnimatePresence>
-    {isMenuOpen && (
-      <motion.div
-        initial={{ opacity: 0, height: 0 }}
-        animate={{ opacity: 1, height: 'auto' }}
-        exit={{ opacity: 0, height: 0 }}
-        className="md:hidden fixed top-full left-0 w-full"
-        style={{ 
-          zIndex: 1000,
-          // Efect de sticlă și pentru meniul mobil
-          background: 'rgba(245, 201, 162, 0.95)',
-          backdropFilter: 'blur(20px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-          borderTop: '1px solid rgba(255, 255, 255, 0.2)'
-        }}
-      >
+<AnimatePresence>
+  {isMenuOpen && (
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      className="md:hidden fixed top-0 left-0 w-full mt-16" // Schimbă top-full în top-0 și adaugă mt-16
+      style={{ 
+        zIndex: 1000,
+        background: 'rgba(245, 201, 162, 0.95)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.2)'
+      }}
+    >
         <div className="container mx-auto px-4 py-4 space-y-4">
           {[
             { id: 'home', name: 'Acasă' },
