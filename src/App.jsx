@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import {
   MapPin, Phone, Mail, Clock,
   Instagram, X, Menu, Coffee,
@@ -13,7 +13,7 @@ import maplibregl from 'maplibre-gl';
 import FoxiLogo from './assets/Foxi_logo 1.png';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-// JSON-LD structured data pentru cele 6 locații
+// JSON-LD structured data pentru cele 8 locații
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -224,6 +224,22 @@ function App() {
       hours: "7:00 - 22:00",
       phone: "+37360665665",
       coords: [47.0367294, 28.8283902]
+    },
+        {
+      id: 7,
+      name: "Grenoble 106A",
+      address: "Strada Grenoble 106A, Chișinău",
+      hours: "7:00 - 22:00",
+      phone: "+37360665665",
+      coords: [46.9899500, 28.8235960] 
+    },
+        {
+      id: 8,
+      name: "Ion Creangă 24/1",
+      address: "Strada Ion Creangă 24/1, Chișinău",
+      hours: "7:00 - 22:00",
+      phone: "+37360665665",
+      coords: [47.0324467, 28.8045497]
     }
   ];
 
@@ -321,11 +337,11 @@ function App() {
       <Helmet>
         <html lang="ro" />
         <title>Foxi Cafe & Market Chișinău – Cafea de specialitate & mini-market local</title>
-        <meta name="description" content="Foxi Cafe & Market în Chișinău – cafea de specialitate, deserturi japoneze Motiko, patiserie, mini-market urban. 6 locații deschise 7:00–22:00." />
+        <meta name="description" content="Foxi Cafe & Market în Chișinău – cafea de specialitate, deserturi japoneze Motiko, patiserie, mini-market urban. 8 locații deschise 7:00–22:00." />
         <link rel="canonical" href="https://foxicafe.md/" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="Foxi Cafe & Market" />
-        <meta property="og:title" content="Foxi Cafe & Market – 6 locații în Chișinău" />
+        <meta property="og:title" content="Foxi Cafe & Market – 8 locații în Chișinău" />
         <meta property="og:description" content="Cafea de specialitate, Motiko, patiserie & mini-market. Deschis zilnic 7:00–22:00." />
         <meta property="og:url" content="https://foxicafe.md/" />
         <meta property="og:image" content="https://foxicafe.md/og-cover.jpg" />
@@ -458,20 +474,28 @@ function App() {
           </motion.p>
           <motion.div className="flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
-            <motion.button onClick={() => scrollToSection('products')}
-              className="px-6 sm:px-8 py-3 rounded-full font-semibold text-base sm:text-lg transition-all duration-300 shadow-lg"
-              style={{ backgroundColor: '#DF7634', color: '#FCFFFB' }}
-              whileHover={{ scale: 1.05, backgroundColor: '#F7975B' }}
-              whileTap={{ scale: 0.95 }}>
-              Vezi produsele
-            </motion.button>
-            <motion.button onClick={() => scrollToSection('locations')}
-              className="px-6 sm:px-8 py-3 border-2 rounded-full font-semibold text-base sm:text-lg transition-all duration-300"
-              style={{ borderColor: '#FCFFFB', color: '#FCFFFB' }}
-              whileHover={{ scale: 1.05, backgroundColor: '#FCFFFB', color: '#125242' }}
-              whileTap={{ scale: 0.95 }}>
-              Găsește locația
-            </motion.button>
+          <motion.button
+            onClick={() => scrollToSection('products')}
+            className="px-6 sm:px-8 py-3 rounded-full font-semibold text-base sm:text-lg shadow-lg"
+            style={{ backgroundColor: '#DF7634', color: '#FCFFFB', cursor: 'pointer' }}
+            whileHover={{ scale: 1.05, backgroundColor: '#F7975B', transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.95, transition: { duration: 0 } }}
+          >
+            Vezi produsele
+          </motion.button>
+
+          <motion.button
+            onClick={() => scrollToSection('locations')}
+            className="px-6 sm:px-8 py-3 border-2 rounded-full font-semibold text-base sm:text-lg"
+            style={{ borderColor: '#FCFFFB', color: '#FCFFFB', cursor: 'pointer' }}
+            whileHover={{ scale: 1.05, backgroundColor: '#FCFFFB', color: '#125242', transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.95, transition: { duration: 0 } }}
+          >
+            Găsește locația
+          </motion.button>
+
+
+
           </motion.div>
         </motion.div>
       </section>
@@ -506,7 +530,7 @@ function App() {
               <motion.div className="absolute -bottom-4 -right-4 p-4 rounded-2xl shadow-lg"
                 style={{ backgroundColor: '#DF7634' }}
                 initial={{ scale: 0 }} whileInView={{ scale: 1 }} transition={{ delay: 0.5 }} viewport={{ once: true }}>
-                <p className="text-white text-sm font-semibold">6 Locații</p>
+                <p className="text-white text-sm font-semibold">8 Locații</p>
                 <p className="text-white text-xs">în Chișinău</p>
               </motion.div>
             </motion.div>
@@ -552,49 +576,64 @@ function App() {
           </div>
         </div>
       </section>
+{/* --- Locations Section --- */}
+<section id="locations" className="py-16 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
+  <div className="container mx-auto px-4 sm:px-6">
+    <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-12">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+        Locațiile Noastre
+      </h2>
+      <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
+    </motion.div>
 
-      {/* --- Locations Section --- */}
-      <section id="locations" className="py-16 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
-        <div className="container mx-auto px-4 sm:px-6">
-          <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
-              Locațiile Noastre
-            </h2>
-            <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
-          </motion.div>
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
-            <div className="space-y-4">
-              {locations.map((location, index) => (
-                <motion.div key={location.id} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: index * 0.1 }} viewport={{ once: true }}>
-                  <motion.div className="p-4 sm:p-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl" style={{ backgroundColor: 'white' }} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <h3 className="text-lg sm:text-xl font-bold mb-2 flex items-center gap-2" style={{ color: '#125242' }}>
-                      <MapPin className="w-5 h-5" style={{ color: '#DF7634' }}/>
-                      {location.name}
-                    </h3>
-                    <p className="text-sm mb-1" style={{ color: '#333333' }}>{location.address}</p>
-                    <p className="text-sm mb-1 flex items-center gap-2" style={{ color: '#333333' }}>
-                      <Clock className="w-4 h-4" style={{ color: '#DF7634' }}/>
-                      {location.hours}
-                    </p>
-                    <p className="text-sm font-semibold" style={{ color: '#DF7634' }}>
-                      <a href={`tel:${location.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>{location.phone}</a>
-                    </p>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </div>
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="h-80 sm:h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl relative" style={{ border: `3px solid ${'#DF7634'}`, minHeight: '320px' }}>
-              <div id="map" className="w-full h-full"></div>
-              <style jsx global>{`
-                .custom-marker { cursor: pointer; transition: transform 0.2s; }
-                .custom-marker:hover { transform: scale(1.1); }
-                .maplibregl-popup-content { border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-                .maplibregl-ctrl-top-right { top: 10px; right: 10px; }
-              `}</style>
+    {/* Grid cu locații și mapă */}
+    <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+      
+      {/* Lista locațiilor */}
+      <div className="space-y-4">
+        {locations.map((location, index) => (
+          <motion.div key={location.id} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: index * 0.1 }} viewport={{ once: true }}>
+            <motion.div className="p-4 sm:p-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl" style={{ backgroundColor: 'white' }} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <h3 className="text-lg sm:text-xl font-bold mb-2 flex items-center gap-2" style={{ color: '#125242' }}>
+                <MapPin className="w-5 h-5" style={{ color: '#DF7634' }}/>
+                {location.name}
+              </h3>
+              <p className="text-sm mb-1" style={{ color: '#333333' }}>{location.address}</p>
+              <p className="text-sm mb-1 flex items-center gap-2" style={{ color: '#333333' }}>
+                <Clock className="w-4 h-4" style={{ color: '#DF7634' }}/>
+                {location.hours}
+              </p>
+              <p className="text-sm font-semibold" style={{ color: '#DF7634' }}>
+                <a href={`tel:${location.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>{location.phone}</a>
+              </p>
             </motion.div>
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        ))}
+      </div>
+      
+      {/* Mapă centrată */}
+      <motion.div 
+        initial={{ opacity: 0, x: 50 }} 
+        whileInView={{ opacity: 1, x: 0 }} 
+        transition={{ duration: 0.8 }} 
+        viewport={{ once: true }}
+        className="flex justify-center items-center h-80 sm:h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl relative"
+        style={{ border: `3px solid ${'#DF7634'}`, minHeight: '320px' }}
+      >
+        <div id="map" className="w-full h-full" />
+        
+        <style jsx global>{`
+          .custom-marker { cursor: pointer; transition: transform 0.2s; }
+          .custom-marker:hover { transform: scale(1.1); }
+          .maplibregl-popup-content { border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+          .maplibregl-ctrl-top-right { top: 10px; right: 10px; }
+        `}</style>
+      </motion.div>
+
+    </div>
+  </div>
+</section>
+
 
       {/* --- Testimonials Section --- */}
       <section className="py-16 md:py-28" style={{ backgroundColor: '#F5C9A2' }}>
@@ -637,53 +676,110 @@ function App() {
         </div>
       </section>
 
-      {/* --- Contact Section --- */}
-      <section id="contact" className="py-16 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
-        <div className="container mx-auto px-4 sm:px-6">
-          <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
-              Contactează-ne
-            </h2>
-            <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }}/>
-          </motion.div>
-          <div className="grid md:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
-            <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
-              <h3 className="text-xl sm:text-2xl font-bold mb-6" style={{ color: '#125242' }}>Informații de contact</h3>
-              <div className="space-y-4">
-                {[{ icon: Phone, text: "+373 60 665 665" },{ icon: Mail, text: "hello@foxicafe.md" },{ icon: Clock, text: "Luni-Duminică: 7:00 - 22:00" }, { icon: MapPin, text: "6 locații în Chișinău" }].map((item, index) => (
-                  <motion.div key={index} className="flex items-center gap-3" style={{ color: '#333333' }} whileHover={{ x: 10 }} transition={{ type: 'spring', stiffness: 300 }}>
-                    <item.icon className="w-5 h-5" style={{ color: '#DF7634' }}/>
-                    <span className="text-base sm:text-lg">
-                      {item.icon === Phone ? <a href="tel:+37360665665" style={{color:'inherit', textDecoration:'none'}}>+373 60 665 665</a> :
-                       item.icon === Mail ? <a href="mailto:hello@foxicafe.md" style={{color:'inherit', textDecoration:'none'}}>hello@foxicafe.md</a> :
-                       item.text}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-              <div className="flex space-x-4 mt-6 sm:mt-8">
-                {[{ icon: Instagram, href: "https://www.instagram.com/foxi_cafemarketmoldova/" }, { icon: FaTiktok, href: "https://www.tiktok.com/@foxi_cafemarketmoldova?is_from_webapp=1&sender_device=pc" }].map((social, idx) => (
-                  <motion.a key={idx} href={social.href} target="_blank" rel="noopener noreferrer" className="p-3 rounded-full transition-colors"
-                    style={{ backgroundColor: '#F5C9A2', color: '#125242' }} whileHover={{ scale: 1.1, rotate: 360 }} whileTap={{ scale: 0.9 }}>
-                    <social.icon className="w-5 h-5 sm:w-6 sm:h-6"/>
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }}>
-              <h3 className="text-xl sm:text-2xl font-bold mb-6" style={{ color: '#125242' }}>Abonează-te la noutăți</h3>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                <input type="email" placeholder="Adresa ta de email" className="w-full px-4 py-3 rounded-xl border transition-colors focus:outline-none text-base sm:text-lg"
-                  style={{ backgroundColor: '#F5C9A2', borderColor: '#DF7634', color: '#125242' }} />
-                <motion.button type="submit" className="w-full py-3 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300"
-                  style={{ backgroundColor: '#DF7634', color: '#FCFFFB' }} whileHover={{ scale: 1.02, backgroundColor: '#F7975B' }} whileTap={{ scale: 0.98 }}>
-                  Abonează-te
-                </motion.button>
-              </form>
-            </motion.div>
+{/* --- Contact Section --- */}
+<section id="contact" className="py-16 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
+  <div className="container mx-auto px-4 sm:px-6">
+    <motion.div 
+      initial={{ opacity: 0, y: 50 }} 
+      whileInView={{ opacity: 1, y: 0 }} 
+      transition={{ duration: 0.8 }} 
+      viewport={{ once: true }} 
+      className="text-center mb-12"
+    >
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+        Contactează-ne
+      </h2>
+      <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }}/>
+    </motion.div>
+    
+    {/* Container principal centrat */}
+    <div className="flex justify-center">
+      <div className="max-w-lg w-full">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.8, delay: 0.2 }} 
+          viewport={{ once: true }}
+        >
+          {/* Informațiile de contact */}
+          <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg mb-8">
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center sm:text-left" style={{ color: '#125242' }}>
+              Informații de contact
+            </h3>
+            
+            <div className="space-y-4 sm:space-y-5">
+              {[
+                { icon: Phone, text: "+373 60 665 665", link: "tel:+37360665665" },
+                { icon: Mail, text: "hello@foxicafe.md", link: "mailto:hello@foxicafe.md" },
+                { icon: Clock, text: "Luni-Duminică: 7:00 - 22:00" }, 
+                { icon: MapPin, text: "8 locații în Chișinău" }
+              ].map((item, index) => (
+                <motion.div 
+                  key={index} 
+                  className="flex items-center gap-4" 
+                  style={{ color: '#333333' }} 
+                  whileHover={{ x: 8 }} 
+                  transition={{ type: 'spring', stiffness: 300 }}
+                >
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center" style={{ backgroundColor: '#F5C9A2' }}>
+                    <item.icon className="w-4 h-4" style={{ color: '#DF7634' }}/>
+                  </div>
+                  <span className="text-base sm:text-lg">
+                    {item.link ? (
+                      <a href={item.link} style={{color:'inherit', textDecoration:'none'}} className="hover:underline">
+                        {item.text}
+                      </a>
+                    ) : (
+                      item.text
+                    )}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+
+          {/* Rețelele sociale centrate */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8, delay: 0.4 }} 
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <h4 className="text-lg font-semibold mb-4" style={{ color: '#125242' }}>
+              Urmărește-ne
+            </h4>
+            <div className="flex justify-center gap-6">
+              {[
+                { icon: Instagram, href: "https://www.instagram.com/foxi_cafemarketmoldova/", name: "Instagram" }, 
+                { icon: FaTiktok, href: "https://www.tiktok.com/@foxi_cafemarketmoldova?is_from_webapp=1&sender_device=pc", name: "TikTok" }
+              ].map((social, idx) => (
+                <motion.a 
+                  key={idx} 
+                  href={social.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex flex-col items-center gap-2 group"
+                  whileHover={{ scale: 1.05 }} 
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <div className="p-4 rounded-full transition-all duration-300 group-hover:shadow-lg" 
+                    style={{ backgroundColor: '#F5C9A2', color: '#125242' }}>
+                    <social.icon className="w-6 h-6 sm:w-7 sm:h-7"/>
+                  </div>
+                  <span className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors">
+                    {social.name}
+                  </span>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* --- Footer --- */}
       <footer className="py-8" style={{ backgroundColor: '#125242' }}>
