@@ -353,7 +353,7 @@ function App() {
       address: "Strada Cuza Vodă 5, Chișinău",
       hours: "7:00 - 22:00",
       phone: "+37360665665",
-      coords: [46.9953, 28.8569]
+      coords: [46.9868741, 28.8683761]
     }
   ];
 
