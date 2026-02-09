@@ -3,133 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Foxi Cafe & Market Chișinău – Cafea de specialitate, Motiko, patiserie, 6 locații</title>
-    <meta name="description" content="Foxi Cafe & Market în Chișinău: cafea de specialitate, deserturi japoneze Motiko, patiserie proaspătă și mini-market. 6 locații deschise zilnic 7:00–22:00." />
-    <link rel="icon" type="image/png" href="/Foxi_logo 1.png" />
-    <link rel="canonical" href="https://foxicafe.md/" />
-    <link rel="alternate" href="https://foxicafe.md/" hreflang="ro" />
+    <title>Ember Coffee Chișinău — Cafea artizanală, patiserie & atmosferă modernă</title>
+    <meta name="description" content="Ember Coffee — cafea artizanală, deserturi proaspete și spații primitoare în Chișinău. Vizitează una dintre cele 6 locații din oraș pentru espresso-uri, prăjituri și coworking." />
+    <!-- NOTE: favicon image removed (CSS-only logo). Add a simple generic favicon if desired. -->
+    <link rel="canonical" href="https://embercoffee.md/" />
+    <link rel="alternate" href="https://embercoffee.md/" hreflang="ro" />
 
     <!-- Social -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Foxi Cafe & Market">
-    <meta property="og:title" content="Foxi Cafe & Market – 6 locații în Chișinău" />
-    <meta property="og:description" content="Cafea de specialitate, Motiko, patiserie & mini-market. Deschis zilnic 7:00–22:00." />
-    <meta property="og:url" content="https://foxicafe.md/" />
-    <meta property="og:image" content="https://foxicafe.md/og-cover.jpg" />
+    <meta property="og:site_name" content="Ember Coffee">
+    <meta property="og:title" content="Ember Coffee — 6 locații în Chișinău" />
+    <meta property="og:description" content="Cafea artizanală, patiserie proaspătă și locuri confortabile de întâlnire. Deschis zilnic 07:00–22:00." />
+    <meta property="og:url" content="https://embercoffee.md/" />
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Performanță de bază (ajută la LCP/INP) -->
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
-    <link rel="preconnect" href="https://api.maptiler.com" crossorigin>
-    <meta name="theme-color" content="#125242" />
+    <!-- Performance preconnect -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <!-- LocalBusiness pentru toate locațiile (JSON-LD) -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- JSON-LD for organization and locations (logo omitted because logo is CSS-only) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "Organization",
-          "@id": "https://foxicafe.md/#org",
-          "name": "Foxi Cafe & Market",
-          "url": "https://foxicafe.md/",
-          "logo": "https://foxicafe.md/Foxi_logo_1.png",
+          "@id": "https://embercoffee.md/#org",
+          "name": "Ember Coffee",
+          "url": "https://embercoffee.md/",
+          "email": "hello@embercoffee.md",
           "sameAs": [
-            "https://www.instagram.com/foxi_cafemarketmoldova/",
-            "https://www.tiktok.com/@foxi_cafemarketmoldova"
+            "https://www.instagram.com/embercoffee.md",
+            "https://www.facebook.com/embercoffee.md"
           ]
         },
         {
           "@type": "CafeOrCoffeeShop",
-          "name": "Foxi Cafe & Market – Igor Vieru 16/1",
-          "image": "https://foxicafe.md/og-cover.jpg",
+          "name": "Ember Coffee — Strada Alexei Mateevici 12, Chișinău, MD",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Strada Igor Vieru 16/1",
+            "streetAddress": "Strada Alexei Mateevici 12",
             "addressLocality": "Chișinău",
             "addressCountry": "MD"
           },
-          "telephone": "+37360665665",
-          "openingHours": "Mo-Su 07:00-22:00",
-          "geo": { "@type": "GeoCoordinates", "latitude": 47.0506347, "longitude": 28.8947369 },
-          "servesCuisine": ["Coffee","Bakery","Japanese Desserts"],
-          "priceRange": "MDL",
-          "url": "https://foxicafe.md/locatii/igor-vieru-16-1",
-          "parentOrganization": { "@id": "https://foxicafe.md/#org" },
-          "sameAs": ["https://www.instagram.com/foxi_cafemarketmoldova/"]
+          "telephone": "+373 22 555 010",
+          "openingHours": "Mon–Sun 07:00–22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.0109, "longitude": 28.8543 },
+          "parentOrganization": { "@id": "https://embercoffee.md/#org" }
         },
         {
           "@type": "CafeOrCoffeeShop",
-          "name": "Foxi Cafe & Market – Andrei Doga 26/4",
-          "image": "https://foxicafe.md/og-cover.jpg",
-          "address": { "@type": "PostalAddress", "streetAddress": "Strada Andrei Doga 26/4", "addressLocality": "Chișinău", "addressCountry": "MD" },
-          "telephone": "+37360665665",
-          "openingHours": "Mo-Su 07:00-22:00",
-          "geo": { "@type": "GeoCoordinates", "latitude": 47.03465, "longitude": 28.8555 },
-          "url": "https://foxicafe.md/locatii/andrei-doga-26-4",
-          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+          "name": "Ember Coffee — Strada Ștefan cel Mare 85, Chișinău, MD",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Strada Ștefan cel Mare 85",
+            "addressLocality": "Chișinău",
+            "addressCountry": "MD"
+          },
+          "telephone": "+373 22 555 010",
+          "openingHours": "Mon–Sun 07:00–22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.0118, "longitude": 28.8430 },
+          "parentOrganization": { "@id": "https://embercoffee.md/#org" }
         },
         {
           "@type": "CafeOrCoffeeShop",
-          "name": "Foxi Cafe & Market – Gheorghe Asachi 27/C",
-          "image": "https://foxicafe.md/og-cover.jpg",
-          "address": { "@type": "PostalAddress", "streetAddress": "Strada Gheorghe Asachi 27/C", "addressLocality": "Chișinău", "addressCountry": "MD" },
-          "telephone": "+37360665665",
-          "openingHours": "Mo-Su 07:00-22:00",
-          "geo": { "@type": "GeoCoordinates", "latitude": 47.00119, "longitude": 28.82255 },
-          "url": "https://foxicafe.md/locatii/gheorghe-asachi-27c",
-          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+          "name": "Ember Coffee — Strada Mihai Eminescu 3, Chișinău, MD",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Strada Mihai Eminescu 3",
+            "addressLocality": "Chișinău",
+            "addressCountry": "MD"
+          },
+          "telephone": "+373 22 555 010",
+          "openingHours": "Mon–Sun 07:00–22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.0152, "longitude": 28.8510 },
+          "parentOrganization": { "@id": "https://embercoffee.md/#org" }
         },
         {
           "@type": "CafeOrCoffeeShop",
-          "name": "Foxi Cafe & Market – Ierusalim 7",
-          "image": "https://foxicafe.md/og-cover.jpg",
-          "address": { "@type": "PostalAddress", "streetAddress": "Strada Ierusalim 7", "addressLocality": "Chișinău", "addressCountry": "MD" },
-          "telephone": "+37360665665",
-          "openingHours": "Mo-Su 07:00-22:00",
-          "geo": { "@type": "GeoCoordinates", "latitude": 47.030519, "longitude": 28.838768 },
-          "url": "https://foxicafe.md/locatii/ierusalim-7",
-          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+          "name": "Ember Coffee — Strada Vasile Alecsandri 22, Chișinău, MD",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Strada Vasile Alecsandri 22",
+            "addressLocality": "Chișinău",
+            "addressCountry": "MD"
+          },
+          "telephone": "+373 22 555 010",
+          "openingHours": "Mon–Sun 07:00–22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.0190, "longitude": 28.8565 },
+          "parentOrganization": { "@id": "https://embercoffee.md/#org" }
         },
         {
           "@type": "CafeOrCoffeeShop",
-          "name": "Foxi Cafe & Market – Mircea cel Bătrân 41A",
-          "image": "https://foxicafe.md/og-cover.jpg",
-          "address": { "@type": "PostalAddress", "streetAddress": "Strada Mircea cel Bătrân 41A", "addressLocality": "Chișinău", "addressCountry": "MD" },
-          "telephone": "+37360665665",
-          "openingHours": "Mo-Su 07:00-22:00",
-          "geo": { "@type": "GeoCoordinates", "latitude": 47.0600006, "longitude": 28.8910569 },
-          "url": "https://foxicafe.md/locatii/mircea-41a",
-          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+          "name": "Ember Coffee — Strada Independenței 5, Chișinău, MD",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Strada Independenței 5",
+            "addressLocality": "Chișinău",
+            "addressCountry": "MD"
+          },
+          "telephone": "+373 22 555 010",
+          "openingHours": "Mon–Sun 07:00–22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.0085, "longitude": 28.8490 },
+          "parentOrganization": { "@id": "https://embercoffee.md/#org" }
         },
         {
           "@type": "CafeOrCoffeeShop",
-          "name": "Foxi Cafe & Market – Albișoara 84/9",
-          "image": "https://foxicafe.md/og-cover.jpg",
-          "address": { "@type": "PostalAddress", "streetAddress": "Strada Albișoara 84/9", "addressLocality": "Chișinău", "addressCountry": "MD" },
-          "telephone": "+37360665665",
-          "openingHours": "Mo-Su 07:00-22:00",
-          "geo": { "@type": "GeoCoordinates", "latitude": 47.0367294, "longitude": 28.8283902 },
-          "url": "https://foxicafe.md/locatii/albisoara-84-9",
-          "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+          "name": "Ember Coffee — Strada Tighina 14, Chișinău, MD",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Strada Tighina 14",
+            "addressLocality": "Chișinău",
+            "addressCountry": "MD"
+          },
+          "telephone": "+373 22 555 010",
+          "openingHours": "Mon–Sun 07:00–22:00",
+          "geo": { "@type": "GeoCoordinates", "latitude": 47.0125, "longitude": 28.8572 },
+          "parentOrganization": { "@id": "https://embercoffee.md/#org" }
         },
         {
           "@type": "FAQPage",
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Care sunt locațiile Foxi Cafe & Market în Chișinău?",
+              "name": "Care este filosofia Ember Coffee?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Avem 6 locații: Igor Vieru 16/1, Andrei Doga 26/4, Gheorghe Asachi 27/C, Ierusalim 7, Mircea cel Bătrân 41A, Albișoara 84/9. Program: 7:00–22:00."
+                "text": "La Ember Coffee punem accent pe boabe prăjite atent, preparare consecventă și experiență relaxantă. Ne mândrim cu produse proaspete și servicii prietenoase."
               }
             },
             {
               "@type": "Question",
-              "name": "Ce produse găsesc la Foxi?",
+              "name": "Pot comanda pentru evenimente private?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Cafea de specialitate, deserturi japoneze Motiko, patiserie și sandwichuri & snacks."
+                "text": "Da — oferim servicii de catering pentru întâlniri mici și evenimente corporate. Trimite un e‑mail la press@embercoffee.md pentru detalii și ofertă."
               }
             }
           ]
@@ -137,8 +150,9 @@
       ]
     }
     </script>
+
   </head>
-  <body>
+  <body class="antialiased bg-white text-gray-800">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
