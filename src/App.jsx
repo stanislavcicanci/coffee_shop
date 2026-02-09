@@ -1,8 +1,6 @@
-// App.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   MapPin, Phone, Mail, Clock,
   Instagram, X, Menu, Coffee,
@@ -10,250 +8,134 @@ import {
 } from 'lucide-react';
 import { FaTiktok } from 'react-icons/fa';
 import maplibregl from 'maplibre-gl';
-import FoxiLogo from './assets/Foxi_logo 1.png';
+import EmberLogo from './assets/Ember_logo.png';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-// JSON-LD structured data pentru cele 9 locații
-// JSON-LD structured data pentru cele 9 locații Foxi Cafe & Market
+// JSON-LD structured data pentru Ember Coffee și cele 6 locații
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://foxicafe.md/#org",
-      "name": "Foxi Cafe & Market",
-      "url": "https://foxicafe.md/",
-      "logo": "https://foxicafe.md/Foxi_logo_1.png",
-      "telephone": "+37360665665",
+      "@id": "https://embercoffee.md/#org",
+      "name": "Ember Coffee",
+      "url": "https://embercoffee.md/",
+      "email": "hello@embercoffee.md",
       "sameAs": [
-        "https://www.instagram.com/foxi_cafemarketmoldova/",
-        "https://www.tiktok.com/@foxi_cafemarketmoldova"
+        "https://www.instagram.com/embercoffee.md",
+        "https://www.facebook.com/embercoffee.md"
       ]
     },
-
     {
       "@type": "CafeOrCoffeeShop",
-      "@id": "https://foxicafe.md/#igor-vieru",
-      "name": "Foxi Cafe & Market – Igor Vieru 16/1",
-      "image": "https://foxicafe.md/og-cover.jpg",
-      "url": "https://foxicafe.md/locatii/igor-vieru-16-1",
-      "telephone": "+37360665665",
-      "priceRange": "MDL",
-      "servesCuisine": ["Coffee", "Bakery", "Desserts"],
-      "openingHours": "Mo-Su 07:00-22:00",
+      "@id": "https://embercoffee.md/#alexei-mateevici",
+      "name": "Ember Coffee — Strada Alexei Mateevici 12",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Strada Igor Vieru 16/1",
+        "streetAddress": "Strada Alexei Mateevici 12",
         "addressLocality": "Chișinău",
         "addressCountry": "MD"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 47.0506347,
-        "longitude": 28.8947369
-      },
-      "hasMap": "https://maps.google.com/?q=47.0506347,28.8947369",
-      "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+      "telephone": "+37322555010",
+      "openingHours": "Mon–Sun 07:00–22:00",
+      "geo": { "@type": "GeoCoordinates", "latitude": 47.0109, "longitude": 28.8543 },
+      "parentOrganization": { "@id": "https://embercoffee.md/#org" }
     },
-
     {
       "@type": "CafeOrCoffeeShop",
-      "@id": "https://foxicafe.md/#andrei-doga",
-      "name": "Foxi Cafe & Market – Andrei Doga 26/4",
-      "image": "https://foxicafe.md/og-cover.jpg",
-      "url": "https://foxicafe.md/locatii/andrei-doga-26-4",
-      "telephone": "+37360665665",
-      "priceRange": "MDL",
-      "servesCuisine": ["Coffee", "Bakery", "Desserts"],
-      "openingHours": "Mo-Su 07:00-22:00",
+      "@id": "https://embercoffee.md/#stefan-cel-mare",
+      "name": "Ember Coffee — Strada Ștefan cel Mare 85",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Strada Andrei Doga 26/4",
+        "streetAddress": "Strada Ștefan cel Mare 85",
         "addressLocality": "Chișinău",
         "addressCountry": "MD"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 47.03465,
-        "longitude": 28.8555
-      },
-      "hasMap": "https://maps.google.com/?q=47.03465,28.8555",
-      "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+      "telephone": "+37322555010",
+      "openingHours": "Mon–Sun 07:00–22:00",
+      "geo": { "@type": "GeoCoordinates", "latitude": 47.0118, "longitude": 28.8430 },
+      "parentOrganization": { "@id": "https://embercoffee.md/#org" }
     },
-
     {
       "@type": "CafeOrCoffeeShop",
-      "@id": "https://foxicafe.md/#asachi",
-      "name": "Foxi Cafe & Market – Gheorghe Asachi 27/C",
-      "image": "https://foxicafe.md/og-cover.jpg",
-      "url": "https://foxicafe.md/locatii/gheorghe-asachi-27c",
-      "telephone": "+37360665665",
-      "priceRange": "MDL",
-      "servesCuisine": ["Coffee", "Bakery", "Desserts"],
-      "openingHours": "Mo-Su 07:00-22:00",
+      "@id": "https://embercoffee.md/#mihai-eminescu",
+      "name": "Ember Coffee — Strada Mihai Eminescu 3",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Strada Gheorghe Asachi 27/C",
+        "streetAddress": "Strada Mihai Eminescu 3",
         "addressLocality": "Chișinău",
         "addressCountry": "MD"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 47.00119,
-        "longitude": 28.82255
-      },
-      "hasMap": "https://maps.google.com/?q=47.00119,28.82255",
-      "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+      "telephone": "+37322555010",
+      "openingHours": "Mon–Sun 07:00–22:00",
+      "geo": { "@type": "GeoCoordinates", "latitude": 47.0152, "longitude": 28.8510 },
+      "parentOrganization": { "@id": "https://embercoffee.md/#org" }
     },
-
     {
       "@type": "CafeOrCoffeeShop",
-      "@id": "https://foxicafe.md/#ierusalim",
-      "name": "Foxi Cafe & Market – Ierusalim 7",
-      "image": "https://foxicafe.md/og-cover.jpg",
-      "url": "https://foxicafe.md/locatii/ierusalim-7",
-      "telephone": "+37360665665",
-      "priceRange": "MDL",
-      "servesCuisine": ["Coffee", "Bakery", "Desserts"],
-      "openingHours": "Mo-Su 07:00-22:00",
+      "@id": "https://embercoffee.md/#vasile-alecsandri",
+      "name": "Ember Coffee — Strada Vasile Alecsandri 22",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Strada Ierusalim 7",
+        "streetAddress": "Strada Vasile Alecsandri 22",
         "addressLocality": "Chișinău",
         "addressCountry": "MD"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 47.030519,
-        "longitude": 28.838768
-      },
-      "hasMap": "https://maps.google.com/?q=47.030519,28.838768",
-      "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+      "telephone": "+37322555010",
+      "openingHours": "Mon–Sun 07:00–22:00",
+      "geo": { "@type": "GeoCoordinates", "latitude": 47.0190, "longitude": 28.8565 },
+      "parentOrganization": { "@id": "https://embercoffee.md/#org" }
     },
-
     {
       "@type": "CafeOrCoffeeShop",
-      "@id": "https://foxicafe.md/#mircea",
-      "name": "Foxi Cafe & Market – Mircea cel Bătrân 41A",
-      "image": "https://foxicafe.md/og-cover.jpg",
-      "url": "https://foxicafe.md/locatii/mircea-41a",
-      "telephone": "+37360665665",
-      "priceRange": "MDL",
-      "servesCuisine": ["Coffee", "Bakery", "Desserts"],
-      "openingHours": "Mo-Su 07:00-22:00",
+      "@id": "https://embercoffee.md/#independentei",
+      "name": "Ember Coffee — Strada Independenței 5",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Strada Mircea cel Bătrân 41A",
+        "streetAddress": "Strada Independenței 5",
         "addressLocality": "Chișinău",
         "addressCountry": "MD"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 47.0600006,
-        "longitude": 28.8910569
-      },
-      "hasMap": "https://maps.google.com/?q=47.0600006,28.8910569",
-      "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+      "telephone": "+37322555010",
+      "openingHours": "Mon–Sun 07:00–22:00",
+      "geo": { "@type": "GeoCoordinates", "latitude": 47.0085, "longitude": 28.8490 },
+      "parentOrganization": { "@id": "https://embercoffee.md/#org" }
     },
-
     {
       "@type": "CafeOrCoffeeShop",
-      "@id": "https://foxicafe.md/#albisoara",
-      "name": "Foxi Cafe & Market – Albișoara 84/9",
-      "image": "https://foxicafe.md/og-cover.jpg",
-      "url": "https://foxicafe.md/locatii/albisoara-84-9",
-      "telephone": "+37360665665",
-      "priceRange": "MDL",
-      "servesCuisine": ["Coffee", "Bakery", "Desserts"],
-      "openingHours": "Mo-Su 07:00-22:00",
+      "@id": "https://embercoffee.md/#tighina",
+      "name": "Ember Coffee — Strada Tighina 14",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Strada Albișoara 84/9",
+        "streetAddress": "Strada Tighina 14",
         "addressLocality": "Chișinău",
         "addressCountry": "MD"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 47.0367294,
-        "longitude": 28.8283902
-      },
-      "hasMap": "https://maps.google.com/?q=47.0367294,28.8283902",
-      "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+      "telephone": "+37322555010",
+      "openingHours": "Mon–Sun 07:00–22:00",
+      "geo": { "@type": "GeoCoordinates", "latitude": 47.0125, "longitude": 28.8572 },
+      "parentOrganization": { "@id": "https://embercoffee.md/#org" }
     },
-
     {
-      "@type": "CafeOrCoffeeShop",
-      "@id": "https://foxicafe.md/#grenoble",
-      "name": "Foxi Cafe & Market – Grenoble 106A",
-      "image": "https://foxicafe.md/og-cover.jpg",
-      "url": "https://foxicafe.md/locatii/grenoble-106a",
-      "telephone": "+37360665665",
-      "priceRange": "MDL",
-      "servesCuisine": ["Coffee", "Bakery", "Desserts"],
-      "openingHours": "Mo-Su 07:00-22:00",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Strada Grenoble 106A",
-        "addressLocality": "Chișinău",
-        "addressCountry": "MD"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 46.98995,
-        "longitude": 28.823596
-      },
-      "hasMap": "https://maps.google.com/?q=46.98995,28.823596",
-      "parentOrganization": { "@id": "https://foxicafe.md/#org" }
-    },
-
-    {
-      "@type": "CafeOrCoffeeShop",
-      "@id": "https://foxicafe.md/#creanga",
-      "name": "Foxi Cafe & Market – Ion Creangă 24/1",
-      "image": "https://foxicafe.md/og-cover.jpg",
-      "url": "https://foxicafe.md/locatii/ion-creanga-24-1",
-      "telephone": "+37360665665",
-      "priceRange": "MDL",
-      "servesCuisine": ["Coffee", "Bakery", "Desserts"],
-      "openingHours": "Mo-Su 07:00-22:00",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Strada Ion Creangă 24/1",
-        "addressLocality": "Chișinău",
-        "addressCountry": "MD"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 47.0324467,
-        "longitude": 28.8045497
-      },
-      "hasMap": "https://maps.google.com/?q=47.0324467,28.8045497",
-      "parentOrganization": { "@id": "https://foxicafe.md/#org" }
-    },
-
-    {
-      "@type": "CafeOrCoffeeShop",
-      "@id": "https://foxicafe.md/#cuza-voda",
-      "name": "Foxi Cafe & Market – Cuza Vodă 5",
-      "image": "https://foxicafe.md/og-cover.jpg",
-      "url": "https://foxicafe.md/locatii/cuza-voda-5",
-      "telephone": "+37360665665",
-      "priceRange": "MDL",
-      "servesCuisine": ["Coffee", "Bakery", "Desserts"],
-      "openingHours": "Mo-Su 07:00-22:00",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Strada Cuza Vodă 5",
-        "addressLocality": "Chișinău",
-        "addressCountry": "MD"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 46.9953,
-        "longitude": 28.8569
-      },
-      "hasMap": "https://maps.google.com/?q=46.9953,28.8569",
-      "parentOrganization": { "@id": "https://foxicafe.md/#org" }
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Care este filosofia Ember Coffee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La Ember Coffee punem accent pe boabe prăjite atent, preparare consecventă și experiență relaxantă. Ne mândrim cu produse proaspete și servicii prietenoase."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Pot comanda pentru evenimente private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Da — oferim servicii de catering pentru întâlniri mici și evenimente corporate. Trimite un e‑mail la press@embercoffee.md pentru detalii și ofertă."
+          }
+        }
+      ]
     }
   ]
 };
@@ -275,7 +157,8 @@ function App() {
     const m = new maplibregl.Map({
       container: 'map',
       style: 'https://api.maptiler.com/maps/streets-v2/style.json?key=9Vy2og5Qbu51kSj5QOC1',
-      center: [28.8415, 47.0265],
+      // center: [lng, lat]
+      center: [28.8543, 47.0109],
       zoom: 13
     });
     m.on('load', () => addMarkers(m));
@@ -285,75 +168,51 @@ function App() {
   const locations = [
     {
       id: 1,
-      name: "Igor Vieru 16/1",
-      address: "Strada Igor Vieru 16/1, Chișinău",
+      name: "Strada Alexei Mateevici 12",
+      address: "Strada Alexei Mateevici 12, Chișinău",
       hours: "7:00 - 22:00",
-      phone: "+37360665665",
-      coords: [47.0506347, 28.8947369]
+      phone: "+373 22 555 010",
+      coords: [47.0109, 28.8543]
     },
     {
       id: 2,
-      name: "Andrei Doga 26/4",
-      address: "Strada Andrei Doga 26/4, Chișinău",
+      name: "Strada Ștefan cel Mare 85",
+      address: "Strada Ștefan cel Mare 85, Chișinău",
       hours: "7:00 - 22:00",
-      phone: "+37360665665",
-      coords: [47.03465, 28.8555]
+      phone: "+373 22 555 010",
+      coords: [47.0118, 28.8430]
     },
     {
       id: 3,
-      name: "Gheorghe Asachi 27/C",
-      address: "Strada Gheorghe Asachi 27/C, Chișinău",
+      name: "Strada Mihai Eminescu 3",
+      address: "Strada Mihai Eminescu 3, Chișinău",
       hours: "7:00 - 22:00",
-      phone: "+37360665665",
-      coords: [47.00119, 28.82255]
+      phone: "+373 22 555 010",
+      coords: [47.0152, 28.8510]
     },
     {
       id: 4,
-      name: "Ierusalim 7",
-      address: "Strada Ierusalim 7, Chișinău",
+      name: "Strada Vasile Alecsandri 22",
+      address: "Strada Vasile Alecsandri 22, Chișinău",
       hours: "7:00 - 22:00",
-      phone: "+37360665665",
-      coords: [47.030519, 28.838768]
+      phone: "+373 22 555 010",
+      coords: [47.0190, 28.8565]
     },
     {
       id: 5,
-      name: "Mircea cel Bătrân 41A",
-      address: "Strada Mircea cel Bătrân 41A, Chișinău",
+      name: "Strada Independenței 5",
+      address: "Strada Independenței 5, Chișinău",
       hours: "7:00 - 22:00",
-      phone: "+37360665665",
-      coords: [47.0600006, 28.8910569]
+      phone: "+373 22 555 010",
+      coords: [47.0085, 28.8490]
     },
     {
       id: 6,
-      name: "Albișoara 84/9",
-      address: "Strada Albișoara 84/9, Chișinău",
+      name: "Strada Tighina 14",
+      address: "Strada Tighina 14, Chișinău",
       hours: "7:00 - 22:00",
-      phone: "+37360665665",
-      coords: [47.0367294, 28.8283902]
-    },
-        {
-      id: 7,
-      name: "Grenoble 106A",
-      address: "Strada Grenoble 106A, Chișinău",
-      hours: "7:00 - 22:00",
-      phone: "+37360665665",
-      coords: [46.9899500, 28.8235960] 
-    },
-        {
-      id: 8,
-      name: "Ion Creangă 24/1",
-      address: "Strada Ion Creangă 24/1, Chișinău",
-      hours: "7:00 - 22:00",
-      phone: "+37360665665",
-      coords: [47.0324467, 28.8045497]
-    },
-        {
-      id: 9,
-      name: "Cuza Vodă 5",
-      address: "Strada Cuza Vodă 5, Chișinău",
-      hours: "7:00 - 22:00",
-      phone: "+37360665665",
-      coords: [46.9868741, 28.8683761]
+      phone: "+373 22 555 010",
+      coords: [47.0125, 28.8572]
     }
   ];
 
@@ -361,7 +220,7 @@ function App() {
     {
       id: 1,
       name: "Swisso Coffee",
-      description: "Cafea de specialitate prăjită proaspăt, cu arome intense și echilibrate.",
+      description: "Cafea artizanală prăjită proaspăt, cu arome intense și echilibrate.",
       label: "Cafea Premium",
       image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800",
       icon: <Coffee className="w-6 h-6" />
@@ -369,15 +228,15 @@ function App() {
     {
       id: 2,
       name: "Motiko Sweets",
-      description: "Deserturi tradiționale japoneze din orez, cu arome delicate și textură unică.",
-      label: "Deserturi Japoneze",
+      description: "Deserturi fine și proaspete, cu texturi delicate.",
+      label: "Deserturi",
       image: "https://images.unsplash.com/photo-1562440499-64c9a111f713?w=800",
       icon: <Cake className="w-6 h-6" />
     },
     {
       id: 3,
       name: "Patiserie Proaspătă",
-      description: "Produse de patiserie proaspete, pregătite zilnic de către artizanii noștri.",
+      description: "Produse de patiserie proaspete, pregătite zilnic.",
       label: "Patiserie",
       image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800",
       icon: <ShoppingBag className="w-6 h-6" />
@@ -385,7 +244,7 @@ function App() {
     {
       id: 4,
       name: "Sandwichuri & Snacks",
-      description: "Sandwichuri proaspete și gustări sănătoase pentru orice moment al zilei.",
+      description: "Sandwichuri proaspete și gustări pentru orice moment al zilei.",
       label: "Gustări",
       image: "https://images.unsplash.com/photo-1559847844-5315695dadae?w=800",
       icon: <ShoppingBag className="w-6 h-6" />
@@ -395,29 +254,35 @@ function App() {
   const testimonials = [
     {
       id: 1,
-      text: "Cafeaua preferată din Chișinău. Aromă intensă și echilibrată, iar atmosfera este perfectă pentru o pauză rapidă.",
+      text: "Cafeaua preferată din Chișinău. Aromă intensă și echilibrată, iar atmosfera este perfectă pentru o pauză.",
       author: "Ana M.",
       rating: 5
     },
     {
       id: 2,
-      text: "Motiko e genial! Deserturile japoneze au o textură unică pe care nu o găsești în altă parte.",
+      text: "Deserturile sunt mereu proaspete și delicioase.",
       author: "Victor C.",
       rating: 5
     },
     {
       id: 3,
-      text: "Atmosferă prietenoasă și produse bune. Perfect pentru cafeaua de dimineață și gustări sănătoase.",
+      text: "Locuri primitoare și servicii prietenoase. Recomand!",
       author: "Maria S.",
       rating: 5
     }
+  ];
+
+  // Social icons WITHOUT links (per request)
+  const socials = [
+    { icon: Instagram, name: "Instagram" },
+    { icon: FaTiktok, name: "TikTok" }
   ];
 
   const addMarkers = (mapInstance) => {
     locations.forEach(location => {
       const popup = new maplibregl.Popup({ offset: 25 }).setHTML(`
         <div class="p-2" style="min-width: 200px">
-          <h3 class="font-bold text-lg" style="color: #125242">${location.name}</h3>
+          <h3 class="font-bold text-lg" style="color: #0f172a">${location.name}</h3>
           <p class="text-sm" style="color: #333">${location.address}</p>
           <p class="text-sm" style="color: #333">${location.hours}</p>
           <p class="text-sm font-semibold" style="color: #DF7634">${location.phone}</p>
@@ -450,15 +315,15 @@ function App() {
     <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: '#F5C9A2' }}>
       <Helmet>
         <html lang="ro" />
-        <title>Foxi Cafe & Market Chișinău – Cafea de specialitate & mini-market local</title>
-        <meta name="description" content="Foxi Cafe & Market în Chișinău – cafea de specialitate, deserturi japoneze Motiko, patiserie, mini-market urban. 9 locații deschise 7:00–22:00." />
-        <link rel="canonical" href="https://foxicafe.md/" />
+        <title>Ember Coffee Chișinău — Cafea artizanală, patiserie & atmosferă modernă</title>
+        <meta name="description" content="Ember Coffee — cafea artizanală, deserturi proaspete și spații primitoare în Chișinău. Vizitează una dintre cele 6 locații din oraș pentru espresso-uri, prăjituri și coworking." />
+        <link rel="canonical" href="https://embercoffee.md/" />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Foxi Cafe & Market" />
-        <meta property="og:title" content="Foxi Cafe & Market – 9 locații în Chișinău" />
-        <meta property="og:description" content="Cafea de specialitate, Motiko, patiserie & mini-market. Deschis zilnic 7:00–22:00." />
-        <meta property="og:url" content="https://foxicafe.md/" />
-        <meta property="og:image" content="https://foxicafe.md/og-cover.jpg" />
+        <meta property="og:site_name" content="Ember Coffee" />
+        <meta property="og:title" content="Ember Coffee — 6 locații în Chișinău" />
+        <meta property="og:description" content="Cafea artizanală, patiserie proaspătă și locuri confortabile de întâlnire. Deschis zilnic 07:00–22:00." />
+        <meta property="og:url" content="https://embercoffee.md/" />
+        <meta property="og:image" content="https://embercoffee.md/og-cover.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
         <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       </Helmet>
@@ -470,7 +335,6 @@ function App() {
   className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#F5C9A2]/20 backdrop-blur-xl shadow-lg border-b border-white/10' : 'bg-transparent backdrop-blur-none'}`}
   style={{ 
     zIndex: 1000,
-    // Efectul de sticlă Apple
     background: scrolled 
       ? 'rgba(245, 201, 162, 0.15)' 
       : 'transparent',
@@ -491,7 +355,7 @@ function App() {
   <div className="container mx-auto px-4 sm:px-6 py-4">
     <div className="flex justify-between items-center">
       <motion.a href="#" className="flex items-center" whileHover={{ scale: 1.05 }}>
-        <img src={FoxiLogo} alt="Foxi Cafe & Market - cafenea în Chișinău" width="160" height="56" className="h-12 sm:h-14 w-auto" />
+        <img src={EmberLogo} alt="Ember Coffee - cafenea în Chișinău" width="160" height="56" className="h-12 sm:h-14 w-auto" />
       </motion.a>
       <div className="hidden md:flex space-x-8">
         {[
@@ -505,7 +369,7 @@ function App() {
             key={item.id}
             onClick={() => scrollToSection(item.id)}
             className="font-medium text-lg transition-colors"
-            style={{ color: scrolled ? '#125242' : 'white', textShadow: scrolled ? 'none' : '0 1px 2px rgba(0,0,0,0.2)' }}
+            style={{ color: scrolled ? '#0f172a' : 'white', textShadow: scrolled ? 'none' : '0 1px 2px rgba(0,0,0,0.2)' }}
             whileHover={{ scale: 1.1, color: '#DF7634' }}
             whileTap={{ scale: 0.95 }}
           >
@@ -516,7 +380,7 @@ function App() {
 
     <motion.button 
   className="md:hidden" 
-  style={{ color: '#125242' }}
+  style={{ color: '#0f172a' }}
   onClick={() => setIsMenuOpen(!isMenuOpen)} 
   whileTap={{ scale: 0.95 }}
 >
@@ -555,9 +419,9 @@ function App() {
                 setIsMenuOpen(false);
               }}
               className="block w-full text-left font-medium text-lg transition-colors py-2"
-              style={{ color: '#125242' }}
+              style={{ color: '#0f172a' }}
               onMouseEnter={e => (e.target.style.color = '#DF7634')}
-              onMouseLeave={e => (e.target.style.color = '#125242')}
+              onMouseLeave={e => (e.target.style.color = '#0f172a')}
             >
               {item.name}
             </button>
@@ -572,7 +436,7 @@ function App() {
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
         <motion.div className="absolute inset-0 z-0" animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 20, repeat: Infinity, repeatType: 'reverse' }}>
           <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=1600')" }}>
-            <div className="absolute inset-0 bg-gradient-to-b from-[#125242]/40 to-[#125242]/60" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0f172a]/40 to-[#0f172a]/60" />
           </div>
         </motion.div>
 
@@ -580,11 +444,11 @@ function App() {
           initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
           <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 font-serif"
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
-            Cafea de specialitate
+            Cafea artizanală
           </motion.h1>
           <motion.p className="text-lg sm:text-xl md:text-2xl mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-            & mini-market urban în inima Chișinăului
+            & patiserie proaspătă în inima Chișinăului
           </motion.p>
           <motion.div className="flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}>
@@ -602,14 +466,11 @@ function App() {
             onClick={() => scrollToSection('locations')}
             className="px-6 sm:px-8 py-3 border-2 rounded-full font-semibold text-base sm:text-lg"
             style={{ borderColor: '#FCFFFB', color: '#FCFFFB', cursor: 'pointer' }}
-            whileHover={{ scale: 1.05, backgroundColor: '#FCFFFB', color: '#125242', transition: { duration: 0.2 } }}
+            whileHover={{ scale: 1.05, backgroundColor: '#FCFFFB', color: '#0f172a', transition: { duration: 0.2 } }}
             whileTap={{ scale: 0.95, transition: { duration: 0 } }}
           >
             Găsește locația
           </motion.button>
-
-
-
           </motion.div>
         </motion.div>
       </section>
@@ -618,7 +479,7 @@ function App() {
       <section id="about" className="py-16 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
         <div className="container mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#0f172a' }}>
               Despre Noi
             </h2>
             <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
@@ -626,25 +487,25 @@ function App() {
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="space-y-6 text-base sm:text-lg" style={{ color: '#333333' }}>
               <p className="leading-relaxed">
-                Foxi Cafe & Market este o experiență urbană modernă ce combină farmecul unei cafenele de specialitate cu funcționalitatea unui mini-market în Chișinău.
+                Ember Coffee este o experiență urbană modernă ce combină cafeaua artizanală cu patiserie proaspătă și spații primitoare în Chișinău.
               </p>
               <p className="leading-relaxed">
-                Oferim cafea de înaltă calitate, deserturi japoneze Motiko, patiserie proaspătă și sandwichuri rapide - toate într-un singur loc.
+                Oferim espresso-uri, prăjituri, și locuri potrivite pentru întâlniri sau lucru în echipă.
               </p>
               <p className="leading-relaxed">
-                Cu design minimalist și atmosferă prietenoasă, locațiile noastre sunt perfecte pentru pauze scurte sau cumpărături rapide în oraș.
+                Cu design minimalist și atmosferă prietenoasă, locațiile noastre sunt perfecte pentru pauze sau întâlniri.
               </p>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="relative">
               <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800"
-                alt="Interior Foxi Cafe – cafenea Chișinău"
+                alt="Interior Ember Coffee – cafenea Chișinău"
                 loading="lazy"
                 width="800" height="600"
                 className="rounded-2xl shadow-2xl w-full h-64 sm:h-96 object-cover" />
               <motion.div className="absolute -bottom-4 -right-4 p-4 rounded-2xl shadow-lg"
                 style={{ backgroundColor: '#DF7634' }}
                 initial={{ scale: 0 }} whileInView={{ scale: 1 }} transition={{ delay: 0.5 }} viewport={{ once: true }}>
-                <p className="text-white text-sm font-semibold">9 Locații</p>
+                <p className="text-white text-sm font-semibold">6 Locații</p>
                 <p className="text-white text-xs">în Chișinău</p>
               </motion.div>
             </motion.div>
@@ -656,7 +517,7 @@ function App() {
       <section id="products" className="py-16 md:py-28" style={{ backgroundColor: '#F5C9A2' }}>
         <div className="container mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#0f172a' }}>
               Produsele Noastre
             </h2>
             <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
@@ -676,7 +537,7 @@ function App() {
                   <div className="p-4 sm:p-6">
                     <div className="flex items-center gap-2 mb-2">
                       <div style={{ color: '#DF7634' }}>{product.icon}</div>
-                      <h3 className="text-lg sm:text-xl font-bold" style={{ color: '#125242' }}>
+                      <h3 className="text-lg sm:text-xl font-bold" style={{ color: '#0f172a' }}>
                         {product.name}
                       </h3>
                     </div>
@@ -690,11 +551,12 @@ function App() {
           </div>
         </div>
       </section>
+
 {/* --- Locations Section --- */}
 <section id="locations" className="py-16 md:py-28" style={{ backgroundColor: '#FCFFFB' }}>
   <div className="container mx-auto px-4 sm:px-6">
     <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-12">
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#0f172a' }}>
         Locațiile Noastre
       </h2>
       <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
@@ -708,7 +570,7 @@ function App() {
         {locations.map((location, index) => (
           <motion.div key={location.id} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: index * 0.1 }} viewport={{ once: true }}>
             <motion.div className="p-4 sm:p-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-xl" style={{ backgroundColor: 'white' }} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-              <h3 className="text-lg sm:text-xl font-bold mb-2 flex items-center gap-2" style={{ color: '#125242' }}>
+              <h3 className="text-lg sm:text-xl font-bold mb-2 flex items-center gap-2" style={{ color: '#0f172a' }}>
                 <MapPin className="w-5 h-5" style={{ color: '#DF7634' }}/>
                 {location.name}
               </h3>
@@ -718,7 +580,7 @@ function App() {
                 {location.hours}
               </p>
               <p className="text-sm font-semibold" style={{ color: '#DF7634' }}>
-                <a href={`tel:${location.phone}`} style={{ color: 'inherit', textDecoration: 'none' }}>{location.phone}</a>
+                <a href={`tel:${location.phone.replace(/\s/g, '')}`} style={{ color: 'inherit', textDecoration: 'none' }}>{location.phone}</a>
               </p>
             </motion.div>
           </motion.div>
@@ -748,12 +610,11 @@ function App() {
   </div>
 </section>
 
-
       {/* --- Testimonials Section --- */}
       <section className="py-16 md:py-28" style={{ backgroundColor: '#F5C9A2' }}>
         <div className="container mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} viewport={{ once: true }} className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#0f172a' }}>
               Ce Spun Clienții
             </h2>
             <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }} />
@@ -800,7 +661,7 @@ function App() {
       viewport={{ once: true }} 
       className="text-center mb-12"
     >
-      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#125242' }}>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 font-serif" style={{ color: '#0f172a' }}>
         Contactează-ne
       </h2>
       <div className="w-24 h-1 mx-auto mb-8" style={{ backgroundColor: '#DF7634' }}/>
@@ -817,16 +678,16 @@ function App() {
         >
           {/* Informațiile de contact */}
           <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg mb-8">
-            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center sm:text-left" style={{ color: '#125242' }}>
+            <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center sm:text-left" style={{ color: '#0f172a' }}>
               Informații de contact
             </h3>
             
             <div className="space-y-4 sm:space-y-5">
               {[
-                { icon: Phone, text: "+373 60 665 665", link: "tel:+37360665665" },
-                { icon: Mail, text: "hello@foxicafe.md", link: "mailto:hello@foxicafe.md" },
+                { icon: Phone, text: "+373 22 555 010", link: "tel:+37322555010" },
+                { icon: Mail, text: "hello@embercoffee.md", link: "mailto:hello@embercoffee.md" },
                 { icon: Clock, text: "Luni-Duminică: 7:00 - 22:00" }, 
-                { icon: MapPin, text: "9 locații în Chișinău" }
+                { icon: MapPin, text: "6 locații în Chișinău" }
               ].map((item, index) => (
                 <motion.div 
                   key={index} 
@@ -852,7 +713,7 @@ function App() {
             </div>
           </div>
 
-          {/* Rețelele sociale centrate */}
+          {/* Rețelele sociale centrate (icons without links) */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             whileInView={{ opacity: 1, y: 0 }} 
@@ -860,31 +721,23 @@ function App() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h4 className="text-lg font-semibold mb-4" style={{ color: '#125242' }}>
+            <h4 className="text-lg font-semibold mb-4" style={{ color: '#0f172a' }}>
               Urmărește-ne
             </h4>
             <div className="flex justify-center gap-6">
-              {[
-                { icon: Instagram, href: "https://www.instagram.com/foxi_cafemarketmoldova/", name: "Instagram" }, 
-                { icon: FaTiktok, href: "https://www.tiktok.com/@foxi_cafemarketmoldova?is_from_webapp=1&sender_device=pc", name: "TikTok" }
-              ].map((social, idx) => (
-                <motion.a 
-                  key={idx} 
-                  href={social.href} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+              {socials.map((social, idx) => (
+                <div 
+                  key={idx}
                   className="flex flex-col items-center gap-2 group"
-                  whileHover={{ scale: 1.05 }} 
-                  whileTap={{ scale: 0.95 }}
                 >
                   <div className="p-4 rounded-full transition-all duration-300 group-hover:shadow-lg" 
-                    style={{ backgroundColor: '#F5C9A2', color: '#125242' }}>
+                    style={{ backgroundColor: '#F5C9A2', color: '#0f172a' }}>
                     <social.icon className="w-6 h-6 sm:w-7 sm:h-7"/>
                   </div>
                   <span className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors">
                     {social.name}
                   </span>
-                </motion.a>
+                </div>
               ))}
             </div>
           </motion.div>
@@ -896,16 +749,16 @@ function App() {
 
 
       {/* --- Footer --- */}
-      <footer className="py-8" style={{ backgroundColor: '#125242' }}>
+      <footer className="py-8" style={{ backgroundColor: '#0f172a' }}>
         <div className="container mx-auto px-4 sm:px-6">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} viewport={{ once: true }} className="flex flex-col items-center">
             <div className="flex flex-col items-center max-w-md text-center">
-              <img src={FoxiLogo} alt="Foxi Cafe & Market - cafenea în Chișinău" width="120" height="42" className="h-10 sm:h-12 w-auto mb-4 opacity-90 hover:opacity-100 transition-opacity" />
+              <img src={EmberLogo} alt="Ember Coffee - cafenea în Chișinău" width="120" height="42" className="h-10 sm:h-12 w-auto mb-4 opacity-90 hover:opacity-100 transition-opacity" />
               <p className="text-sm mb-2 font-light" style={{ color: '#F5C9A2' }}>
-                Cafea de specialitate & mini-market urban
+                Cafea artizanală & patiserie proaspătă
               </p>
               <p className="text-xs font-light" style={{ color: 'rgba(245, 201, 162, 0.7)' }}>
-                © 2025 Foxi Cafe & Market. Toate drepturile rezervate.
+                © 2026 Ember Coffee. Toate drepturile rezervate.
               </p>
             </div>
           </motion.div>
